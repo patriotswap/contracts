@@ -11,7 +11,7 @@ import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import "./PatriotToken.sol";
 import "./TheWall.sol";
 
-// MasterChief is the leader of PATRIOT. He can make Patriot and he is a fair guy.
+// MasterChef is the master of Patriot. He can make Patriot and he is a fair guy.
 //
 // Note that it's ownable and the owner wields tremendous power. The ownership
 // will be transferred to a governance smart contract once PATRIOT is sufficiently
@@ -186,7 +186,7 @@ contract MasterChief is Ownable, ReentrancyGuard {
         pool.lastRewardBlock = block.number;
     }
 
-    // Deposit LP tokens to MasterChief for PATRIOT allocation.
+    // Deposit LP tokens to MasterChef for PATRIOT allocation.
     function deposit(uint256 _pid, uint256 _amount) public nonReentrant {
         PoolInfo storage pool = poolInfo[_pid];
         UserInfo storage user = userInfo[_pid][msg.sender];
@@ -211,7 +211,7 @@ contract MasterChief is Ownable, ReentrancyGuard {
         emit Deposit(msg.sender, _pid, _amount);
     }
 
-    // Withdraw LP tokens from MasterChief.
+    // Withdraw LP tokens from MasterChef.
     function withdraw(uint256 _pid, uint256 _amount) public nonReentrant {
         PoolInfo storage pool = poolInfo[_pid];
         UserInfo storage user = userInfo[_pid][msg.sender];
@@ -273,7 +273,7 @@ contract MasterChief is Ownable, ReentrancyGuard {
 
     function updateMultiplier(uint256 newMultiplier) public onlyOwner {
         require(newMultiplier >= 1, "new Multiplier must be greater than 1X");
-        require(newMultiplier <= 3, "new Multiplier cannot be greater than 3X to prevent unnecessary inflation");
+        require(newMultiplier <= 5, "new Multiplier cannot be greater than 5X to prevent unnecessary inflation");
         PATRIOT_MULTIPLIER = newMultiplier;
         emit UpdateMultiplier(msg.sender, newMultiplier);
     }
